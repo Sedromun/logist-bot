@@ -2,7 +2,7 @@ version: '3.8'
 services:
   bot:
     build: .
-    container_name: bot
+    container_name: logist-bot
     environment:
       - API_TOKEN=${API_TOKEN}
     volumes:
