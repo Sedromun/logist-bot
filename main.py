@@ -126,7 +126,9 @@ async def handle_planning_file(message: Message):
         except Exception:
             continue
         rc = str(row[col_rc])
-        plan_date = pd.to_datetime(str(row[col_date]), dayfirst=True, errors='coerce')
+        plan_date = pd.to_datetime(str(row[col_date]), errors='coerce')
+        # Отладочная информация
+        print(f"Парсинг даты: '{row[col_date]}' -> {plan_date}")
         rc_norm = normalize_rc_name("АО \"Тандер\" " + rc)  # добавить префикс для поиска в реестре
         # Найти строку в исходном df
         df_idx = None
@@ -189,7 +191,8 @@ async def handle_registry_file(message: Message):
     date_cols = []
     for col in df.columns:
         try:
-            date = pd.to_datetime(str(col), dayfirst=True, errors='coerce')
+            # Пробуем разные форматы дат
+            date = pd.to_datetime(str(col), errors='coerce')
             if pd.notnull(date):
                 date_cols.append((col, date))
         except Exception:
