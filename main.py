@@ -1,5 +1,5 @@
 import asyncio
-from config import bot, dp
+from config import FERNET, bot, dp
 from handlers import planner_router, register_router, admin_router, partner_router, warehouse_router
 
 dp.include_router(admin_router)

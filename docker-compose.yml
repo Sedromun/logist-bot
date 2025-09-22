@@ -18,7 +18,7 @@ services:
     build:
       context: ./database
       dockerfile: Dockerfile
-    container_name: database
+    container_name: pallets-database
     restart: always
     volumes:
       - db_volume:/var/lib/postgresql/data

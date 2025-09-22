@@ -7,4 +7,4 @@ restart:
 bot:
 	docker exec -it pallets-bot bash
 db:
-	docker exec -it database bash
+	docker exec -it pallets-database bash
