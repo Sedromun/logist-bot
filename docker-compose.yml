@@ -1,10 +1,27 @@
 version: '3.8'
+
 services:
-  bot:
-    build: .
-    container_name: logist-bot
-    environment:
-      - API_TOKEN=${API_TOKEN}
+  pallets-bot:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: pallets-bot
+    restart: always
+    depends_on:
+      - database
     volumes:
-      - .:/app
-    restart: unless-stopped 
+      - ./:/app
+    env_file:
+      - ./.env
+
+  database:
+    build:
+      context: ./database
+      dockerfile: Dockerfile
+    container_name: database
+    restart: always
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+
+volumes:
+  db_volume:
